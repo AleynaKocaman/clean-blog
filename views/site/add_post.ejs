@@ -26,12 +26,13 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-          <form novalidate>
+          <form action="/new-post" method="post" novalidate>
             <div class="control-group">
               <div class="form-group floating-label-form-group controls">
                 <label>Post Title</label>
                 <input
                   type="text"
+                  name="title"
                   class="form-control"
                   placeholder="Name"
                   id="name"
@@ -47,6 +48,7 @@
                 <textarea
                   rows="5"
                   class="form-control"
+                  name="detail"
                   placeholder="Message"
                   id="message"
                   required

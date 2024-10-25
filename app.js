@@ -3,27 +3,31 @@
 const express =require('express'); /// do import
 const app = express();
 require('dotenv').config()
+const mongoose = require('mongoose');
 
-app.use(express.static('public')); //public klosoru altındaki butun dosyaları çalıştıracak
+const Post =require('./models/post')
+const pageRouter =require('./router/pageRouter')
+const postRouter=require('./router/postRouter')
+mongoose.connect('mongodb://localhost/clean-blog-test-db');
+
 app.set('view engine','ejs');
+app.use(express.static('public')); //public klosoru altındaki butun dosyaları çalıştıracak
+
+app.use(express.urlencoded({extended:true}));
+app.use(express.json());
+
+
 //request --> want 
-app.get("/",(req,res)=>{
-    res.render('site/index')
-})
+app.use("/",pageRouter);
 
-app.get("/about",(req,res)=>{
-    res.render('site/about')
-})
 
-app.get("/add_post",(req,res)=>{
-    res.render('site/add_post')
-})
 
 app.get("/post",(req,res)=>{
     res.render('site/post')
 })
 
+
 //response --> answer
 app.listen(process.env.PORT || 3000, ()=>{
-    console.log('Server is running on port 3000');
+    console.log('proje çalıştırıldı');
 })
